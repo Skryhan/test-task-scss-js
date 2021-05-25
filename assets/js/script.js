@@ -5,22 +5,26 @@ const dots = document.querySelectorAll(".dot")
 const mobileMenu = document.querySelector(".menu-mobile-wrap")
 const mobileSearch = document.querySelector(".search-mobile-wrap")
 let index = 0
-let windowInnerWidth = window.innerWidth
 
 
+const checkScreen = () => {
 
-const checkScreen = windowInnerWidth => {
+    let windowInnerWidth = window.innerWidth
     
     if (windowInnerWidth < 721) {
         slides[1].classList.remove("active")
+        dots[3].style.display = "inline-block"
     } else {
         dots[3].style.display = "none"
+        slides[1].classList.add("active")
     }
+    console.log("gi")
 }
 
 
-
 const activeSlide = n => {
+
+    let windowInnerWidth = window.innerWidth
 
     for (slide of slides) {
         slide.classList.remove("active")
@@ -33,8 +37,8 @@ const activeSlide = n => {
     }
 }
 
-document.addEventListener("load", checkScreen(windowInnerWidth))
-
+document.addEventListener("load", checkScreen())
+window.addEventListener("resize", checkScreen)
 
 
 const activeDot = n => {
@@ -185,5 +189,4 @@ document.addEventListener("click", function (e) {
     if (e.target.classList.contains("search-mobile-cross")) {
         mobileSearch.classList.remove("active")
     }
-    
 })
